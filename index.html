@@ -154,6 +154,109 @@
             color: #2AABEE;
             font-weight: 600;
         }
+        
+    /* Стили для контейнера слайдера */
+    .slider-container {
+        max-width: 400px;
+        margin: 40px auto;
+        position: relative;
+        overflow: hidden;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        background: #17212b; /* Цвет подложки в тон Telegram */
+    }
+
+    /* Линия с картинками, которая будет двигаться */
+    .slider-track {
+        display: flex;
+        transition: transform 0.4s ease-in-out;
+        width: 100%;
+    }
+
+    /* Стиль для каждого слайда */
+    .slide {
+        min-width: 100%;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .slide img {
+        width: 100%;
+        height: auto;
+        display: block;
+        pointer-events: none; /* Чтобы картинку случайным свайпом не тянули */
+    }
+
+    /* Кнопки переключения (стрелочки) */
+    .slider-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(23, 33, 43, 0.8);
+        color: #fff;
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 18px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: background 0.3s;
+        z-index: 10;
+    }
+
+    .slider-btn:hover {
+        background: #24313f;
+    }
+
+    .prev-btn { left: 10px; }
+    .next-btn { right: 10px; }
+
+    /* Точки (индикаторы) снизу */
+    .slider-dots {
+        text-align: center;
+        padding: 15px 0;
+        background: #17212b;
+    }
+
+    .dot {
+        inline-size: 8px;
+        block-size: 8px;
+        margin: 0 5px;
+        background-color: #526777;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.3s;
+        cursor: pointer;
+    }
+
+    .dot.active {
+        background-color: #5288c1; /* Цвет активной точки в стиле ТГ */
+    }
+
+    /* Неброский футер для официальной ссылки */
+    .footer-links {
+        text-align: center;
+        margin-top: 50px;
+        padding: 20px 0;
+        font-size: 13px;
+    }
+
+    .footer-links a {
+        color: #6c7883;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+        color: #5288c1;
+        text-decoration: underline;
+    }
+
     </style>
 </head>
 <body>
