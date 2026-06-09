@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telesint Бот Telegram — Официальное Зеркало Сервиса</title>
-    <meta name="description" content="Актуальное рабочее зеркало Telesint. Проверка истории юзернеймов, поиск групп и построение дерева связей in Telegram для безопасности ваших сделок.">
+    <title>Telesint Бот Telegram — Официальный Сервис Аналитики</title>
+    <meta name="description" content="Защитите свои сделки и проверьте контрагентов. Поиск групп, истории юзернеймов и построение дерева связей в Telegram через Telesint.">
     
     <style>
-        /* Общие стили для страницы */
+        /* Базовые настройки под дизайн Telegram */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -15,231 +15,281 @@
         }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #0e1621; /* Темная тема Telegram */
+            background-color: #0e1621;
             color: #ffffff;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             min-height: 100vh;
-            padding: 20px;
+            padding: 40px 20px;
         }
 
         .container {
-            max-width: 600px;
+            max-width: 550px;
             width: 100%;
             text-align: center;
         }
 
+        /* Логотип-иконка вместо картинок */
+        .logo-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
         h1 {
-            font-size: 24px;
-            margin-bottom: 10px;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 12px;
             color: #f5f5f5;
+            letter-spacing: -0.5px;
         }
 
         p.subtitle {
             color: #708499;
-            font-size: 15px;
-            margin-bottom: 30px;
+            font-size: 16px;
+            margin-bottom: 35px;
+            line-height: 1.5;
+        }
+
+        /* Премиальная кнопка */
+        .btn-link {
+            display: block;
+            background: linear-gradient(135deg, #2481cc 0%, #2a95e6 100%);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 16px 30px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 17px;
+            transition: all 0.2s ease;
+            box-shadow: 0 6px 20px rgba(36, 129, 204, 0.3);
+            margin-bottom: 40px;
+        }
+        .btn-link:hover {
+            background: linear-gradient(135deg, #2a95e6 0%, #32a3f5 100%);
+            box-shadow: 0 8px 25px rgba(36, 129, 204, 0.4);
+            transform: translateY(-1px);
+        }
+        .btn-link:active {
+            transform: translateY(1px);
+            box-shadow: 0 3px 10px rgba(36, 129, 204, 0.3);
+        }
+
+        /* Блок карточек с преимуществами */
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        .feature-card {
+            background-color: #17212b;
+            border: 1px solid #24303f;
+            border-radius: 12px;
+            padding: 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .feature-icon {
+            font-size: 22px;
+            background: #202b36;
+            padding: 8px;
+            border-radius: 8px;
+            line-height: 1;
+        }
+
+        .feature-text h3 {
+            font-size: 16px;
+            color: #f5f5f5;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .feature-text p {
+            color: #708499;
+            font-size: 14px;
             line-height: 1.4;
         }
 
-        /* Кнопка перехода в бота */
-        .btn-link {
-            display: inline-block;
-            background-color: #2481cc;
-            color: #ffffff;
-            text-decoration: none;
-            padding: 14px 30px;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 16px;
-            transition: background-color 0.2s, transform 0.1s;
-            box-shadow: 0 4px 12px rgba(36, 129, 204, 0.3);
-            margin-bottom: 20px;
-        }
-        .btn-link:hover {
-            background-color: #288fd8;
-        }
-        .btn-link:active {
-            transform: scale(0.98);
-        }
-
-        /* --- СТИЛИ ДЛЯ СЛАЙДЕРА ИНТЕРФЕЙСА --- */
-        .slider-container {
-            max-width: 340px; /* Идеальная ширина под вертикальные скриншоты */
-            width: 100%;
-            margin: 30px auto 10px auto;
-            position: relative;
-            overflow: hidden;
-            border-radius: 14px;
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
-            background: #17212b;
-            border: 1px solid #24303f;
-        }
-
-        .slider-track {
-            display: flex;
-            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-            width: 100%;
-        }
-
-        .slide {
-            min-width: 100%;
-            box-sizing: border-box;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .slide img {
-            width: 100%;
-            height: auto;
-            display: block;
-            pointer-events: none;
-        }
-
-        /* Стрелочки навигации */
-        .slider-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(23, 33, 43, 0.85);
-            color: #fff;
-            border: 1px solid #2b394a;
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 16px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: background 0.2s;
-            z-index: 10;
-        }
-        .slider-btn:hover {
-            background: #243140;
-        }
-        .prev-btn { left: 8px; }
-        .next-btn { right: 8px; }
-
-        /* Точки-индикаторы */
-        .slider-dots {
-            text-align: center;
+        /* Удобный интерактивный FAQ (Аккордеон) */
+        .faq-section {
+            text-align: left;
             margin-bottom: 40px;
         }
-        .dot {
-            width: 8px;
-            height: 8px;
-            margin: 0 5px;
-            background-color: #435465;
-            border-radius: 50%;
-            display: inline-block;
-            transition: background-color 0.3s, transform 0.3s;
-            cursor: pointer;
-        }
-        .dot.active {
-            background-color: #5288c1;
-            transform: scale(1.2);
+
+        .faq-title {
+            font-size: 18px;
+            color: #f5f5f5;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-align: center;
         }
 
-        /* --- СТИЛИ ДЛЯ НЕБРОСКОГО ФУТЕРА --- */
+        .faq-item {
+            background-color: #17212b;
+            border: 1px solid #24303f;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 15px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #f5f5f5;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .faq-question::after {
+            content: '➔';
+            font-size: 12px;
+            color: #5288c1;
+            transition: transform 0.3s ease;
+            transform: rotate(90deg);
+        }
+
+        .faq-item.active .faq-question::after {
+            transform: rotate(-90deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background-color: #131b24;
+            color: #708499;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .faq-answer-content {
+            padding: 15px;
+        }
+
+        /* Футер */
         .footer-links {
             margin-top: auto;
-            padding: 30px 0 10px 0;
-            font-size: 12px;
-            width: 100%;
+            padding: 20px 0;
+            font-size: 13px;
             text-align: center;
+            width: 100%;
         }
         .footer-links p {
             color: #536573;
         }
         .footer-links a {
-            color: #536573;
+            color: #5288c1;
             text-decoration: none;
-            border-bottom: 1px dotted #435465;
-            transition: color 0.2s, border-color 0.2s;
+            transition: opacity 0.2s;
         }
         .footer-links a:hover {
-            color: #5288c1;
-            border-bottom-color: #5288c1;
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Зеркало Telesint в Telegram</h1>
-        <p class="subtitle">Поиск и глубокий анализ аккаунтов. Проверка связей, истории юзернеймов и групп для обеспечения безопасности сделок и вычисления мошенников.</p>
+        <span class="logo-icon">🔍</span>
         
-        <a href="#" class="btn-link" target="_blank">Запустить Telesint Бот</a>
+        <h1>Интеллектуальный анализ Telegram</h1>
+        <p class="subtitle">Официальное веб-зеркало сервиса Telesint. Быстрая проверка контрагентов, защита от P2P-скама и полный OSINT-анализ аккаунтов в один клик.</p>
+        
+        <a href="#" class="btn-link" target="_blank">Запустить проверку в Telegram</a>
 
-        <div class="slider-container">
-            <button class="slider-btn prev-btn">&#10094;</button>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🌿</div>
+                <div class="feature-text">
+                    <h3>Дерево связей</h3>
+                    <p>Мгновенное построение карты контактов пользователя и определение его реального окружения.</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📂</div>
+                <div class="feature-text">
+                    <h3>История сообществ</h3>
+                    <p>Полный список открытых и приватных чатов, в которых когда-либо состоял или администрировал аккаунт.</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📝</div>
+                <div class="feature-text">
+                    <h3>Архив юзернеймов</h3>
+                    <p>Отслеживание смены имен, никнеймов и био для вычисления скрывающихся мошенников.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-section">
+            <div class="faq-title">Часто задаваемые вопросы</div>
             
-            <div class="slider-track">
-                <div class="slide">
-                    <img src="IMG_8234.jpeg" alt="Интерфейс Telesint - Панель">
-                </div>
-                <div class="slide">
-                    <img src="IMG_8235.jpeg" alt="Интерфейс Telesint - Поиск групп">
-                </div>
-                <div class="slide">
-                    <img src="IMG_8236.jpeg" alt="Интерфейс Telesint - Связи">
-                </div>
-                <div class="slide">
-                    <img src="IMG_8237.jpeg" alt="Интерфейс Telesint - Результаты">
+            <div class="faq-item">
+                <div class="faq-question">Для чего нужен Telesint?</div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Сервис разработан для верификации пользователей в Telegram. Он незаменим для P2P-трейдеров, фрилансеров и предпринимателей перед совершением сделок, переводом авансов или покупкой цифровых активов.
+                    </div>
                 </div>
             </div>
 
-            <button class="slider-btn next-btn">&#10095;</button>
-        </div>
+            <div class="faq-item">
+                <div class="faq-question">Как начать проверку?</div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Нажмите кнопку «Запустить проверку», перейдите в официальный бот и отправьте ему `ID` пользователя, номер телефона или `username` (ссылку на профиль).
+                    </div>
+                </div>
+            </div>
 
-        <div class="slider-dots">
-            <span class="dot active" onclick="currentSlide(0)"></span>
-            <span class="dot" onclick="currentSlide(1)"></span>
-            <span class="dot" onclick="currentSlide(2)"></span>
-            <span class="dot" onclick="currentSlide(3)"></span>
+            <div class="faq-item">
+                <div class="faq-question">Это безопасно и анонимно?</div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Да, все запросы обрабатываются в строгой конфиденциальности. Пользователь, которого вы проверяете, никогда не узнает о том, что по его аккаунту собиралась аналитика.
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <footer class="footer-links">
-        <p>Информационный ресурс. Интеграция с <a href="https://t.me/telesint" target="_blank" rel="noopener noreferrer">официальным каналом проекта Telesint</a></p>
+        <p>Информационный ресурс. Партнерская интеграция с <a href="https://t.me/telesint" target="_blank" rel="noopener noreferrer">официальным каналом Telesint</a></p>
     </footer>
 
     <script>
-        const track = document.querySelector('.slider-track');
-        const slides = document.querySelectorAll('.slide');
-        const dots = document.querySelectorAll('.dot');
-        const nextBtn = document.querySelector('.next-btn');
-        const prevBtn = document.querySelector('.prev-btn');
-
-        let currentIndex = 0;
-
-        function updateSlider() {
-            // Двигаем дорожку со слайдами
-            track.style.transform = `translateX(-${currentIndex * 100}%)`;
-            
-            // Переключаем активную точку
-            dots.forEach(dot => dot.classList.remove('active'));
-            dots[currentIndex].classList.add('active');
-        }
-
-        nextBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) < slides.length ? currentIndex + 1 : 0;
-            updateSlider();
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+                const answer = faqItem.querySelector('.faq-answer');
+                
+                // Переключаем активный класс
+                faqItem.classList.toggle('active');
+                
+                if (faqItem.classList.contains('active')) {
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                } else {
+                    answer.style.maxHeight = '0';
+                }
+            });
         });
-
-        prevBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex - 1) >= 0 ? currentIndex - 1 : slides.length - 1;
-            updateSlider();
-        });
-
-        function currentSlide(index) {
-            currentIndex = index;
-            updateSlider();
-        }
     </script>
 </body>
 </html>
