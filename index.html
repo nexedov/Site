@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Telesint Бот Telegram — Официальный Сервис Аналитики</title>
-    <meta name="description" content="Защитите свои сделки и проверьте контрагентов. Поиск групп, истории юзернеймов и построение дерева связей в Telegram через Telesint.">
+    <meta name="description" content="Проверьте контрагентов и защитите свои сделки. Поиск групп, истории юзернеймов и построение дерева связей в Telegram через Telesint.">
     
     <style>
-        /* Базовые настройки под дизайн Telegram */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -22,6 +21,12 @@
             align-items: center;
             min-height: 100vh;
             padding: 40px 20px;
+            opacity: 0;
+            animation: fadeInPage 0.8s forwards ease-out;
+        }
+
+        @keyframes fadeInPage {
+            to { opacity: 1; }
         }
 
         .container {
@@ -30,18 +35,16 @@
             text-align: center;
         }
 
-        /* Логотип-иконка вместо картинок */
         .logo-icon {
-            font-size: 50px;
+            font-size: 55px;
             margin-bottom: 20px;
             display: inline-block;
-            animation: pulse 2s infinite ease-in-out;
+            animation: float 3s infinite ease-in-out;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
         }
 
         h1 {
@@ -59,31 +62,48 @@
             line-height: 1.5;
         }
 
-        /* Премиальная кнопка */
         .btn-link {
             display: block;
+            width: 100%;
             background: linear-gradient(135deg, #2481cc 0%, #2a95e6 100%);
             color: #ffffff;
             text-decoration: none;
-            padding: 16px 30px;
-            border-radius: 12px;
+            padding: 18px 30px;
+            border-radius: 14px;
             font-weight: 600;
-            font-size: 17px;
-            transition: all 0.2s ease;
-            box-shadow: 0 6px 20px rgba(36, 129, 204, 0.3);
+            font-size: 18px;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 4px 15px rgba(36, 129, 204, 0.4);
             margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
         }
-        .btn-link:hover {
-            background: linear-gradient(135deg, #2a95e6 0%, #32a3f5 100%);
-            box-shadow: 0 8px 25px rgba(36, 129, 204, 0.4);
-            transform: translateY(-1px);
-        }
-        .btn-link:active {
-            transform: translateY(1px);
-            box-shadow: 0 3px 10px rgba(36, 129, 204, 0.3);
+        
+        .btn-link::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 50%; height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-25deg);
+            transition: 0.75s;
         }
 
-        /* Блок карточек с преимуществами */
+        .btn-link:hover {
+            background: linear-gradient(135deg, #2a95e6 0%, #32a3f5 100%);
+            box-shadow: 0 8px 25px rgba(36, 129, 204, 0.6);
+            transform: translateY(-2px);
+        }
+        
+        .btn-link:hover::before {
+            left: 125%;
+        }
+
+        .btn-link:active {
+            transform: translateY(1px);
+            box-shadow: 0 3px 10px rgba(36, 129, 204, 0.4);
+        }
+
         .features-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -100,6 +120,20 @@
             display: flex;
             align-items: flex-start;
             gap: 15px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUpCard 0.5s forwards ease-out;
+        }
+
+        .feature-card:nth-child(1) { animation-delay: 0.2s; }
+        .feature-card:nth-child(2) { animation-delay: 0.4s; }
+        .feature-card:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes fadeInUpCard {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .feature-icon {
@@ -123,7 +157,6 @@
             line-height: 1.4;
         }
 
-        /* Удобный интерактивный FAQ (Аккордеон) */
         .faq-section {
             text-align: left;
             margin-bottom: 40px;
@@ -143,6 +176,11 @@
             border-radius: 10px;
             margin-bottom: 10px;
             overflow: hidden;
+            transition: border-color 0.3s;
+        }
+
+        .faq-item:hover {
+            border-color: #3b4e63;
         }
 
         .faq-question {
@@ -155,24 +193,28 @@
             justify-content: space-between;
             align-items: center;
             user-select: none;
+            transition: background-color 0.2s;
+        }
+
+        .faq-question:hover {
+            background-color: #1c2936;
         }
 
         .faq-question::after {
-            content: '➔';
-            font-size: 12px;
+            content: '▼';
+            font-size: 10px;
             color: #5288c1;
-            transition: transform 0.3s ease;
-            transform: rotate(90deg);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .faq-item.active .faq-question::after {
-            transform: rotate(-90deg);
+            transform: rotate(-180deg);
         }
 
         .faq-answer {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease;
+            transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             background-color: #131b24;
             color: #708499;
             font-size: 14px;
@@ -183,7 +225,6 @@
             padding: 15px;
         }
 
-        /* Футер */
         .footer-links {
             margin-top: auto;
             padding: 20px 0;
@@ -210,6 +251,7 @@
         <span class="logo-icon">🔍</span>
         
         <h1>Интеллектуальный анализ Telegram</h1>
+        <p class="subtitle">Рабочее веб-зеркало сервиса Telesint. Быстрая проверка контрагентов, защита от P2P-скама и полный OSINT-анализ аккаунтов.</p>
         
         <a href="https://t.me/TeleSint_TgBot" class="btn-link" target="_blank">Запустить проверку в Telegram</a>
 
@@ -244,7 +286,7 @@
                 <div class="faq-question">Для чего нужен Telesint?</div>
                 <div class="faq-answer">
                     <div class="faq-answer-content">
-                        Сервис разработан для верификации пользователей в Telegram. Он незаменим для P2P-трейдеров, фрилансеров и предпринимателей перед совершением сделок, переводом авансов или покупкой цифровых активов.
+                        Сервис разработан для верификации пользователей в Telegram. Он необходим для P2P-трейдеров, фрилансеров и предпринимателей перед совершением сделок, переводом авансов или покупкой цифровых активов.
                     </div>
                 </div>
             </div>
@@ -253,16 +295,16 @@
                 <div class="faq-question">Как начать проверку?</div>
                 <div class="faq-answer">
                     <div class="faq-answer-content">
-                        Нажмите кнопку «Запустить проверку», перейдите в официальный бот и отправьте ему `ID` пользователя, номер телефона или `username` (ссылку на профиль).
+                        Нажмите кнопку «Запустить проверку», перейдите в чат с ботом и отправьте команду <strong>/start</strong>. После этого пришлите ID пользователя, номер телефона или username контрагента.
                     </div>
                 </div>
             </div>
 
             <div class="faq-item">
-                <div class="faq-question">Это безопасно и анонимно?</div>
+                <div class="faq-question">Кто может увидеть историю моих запросов?</div>
                 <div class="faq-answer">
                     <div class="faq-answer-content">
-                        Да, все запросы обрабатываются в строгой конфиденциальности. Пользователь, которого вы проверяете, никогда не узнает о том, что по его аккаунту собиралась аналитика.
+                        Все поисковые запросы внутри бота конфиденциальны. Однако пользователи, имеющие Premium-подписку в Telesint, могут запросить и посмотреть историю поисковых запросов, связанных со своим личным ID или юзернеймом.
                     </div>
                 </div>
             </div>
@@ -279,7 +321,6 @@
                 const faqItem = button.parentElement;
                 const answer = faqItem.querySelector('.faq-answer');
                 
-                // Переключаем активный класс
                 faqItem.classList.toggle('active');
                 
                 if (faqItem.classList.contains('active')) {
